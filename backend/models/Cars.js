@@ -13,6 +13,11 @@ const carSchema = Schema(
     year: Number,
     color: String,
     price: Number,
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
   },
   {
     timestamps: true,

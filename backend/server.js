@@ -19,16 +19,20 @@ const app = express();
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: false,
+    extended: false, //для форми
   })
 );
 
 app.use('/api/v1', require('./routes/carsRoutes'));
-
-// connectDB();
-(async () => {
-  await connectDB(); // immediately invoked function expression;
-})();
+app.use(
+  '/',
+  require('./routes/usersRouters')
+)(
+  // connectDB();
+  async () => {
+    await connectDB(); // immediately invoked function expression;
+  }
+)();
 
 app.use('*', (req, res, _) => {
   res.status(404).json({
